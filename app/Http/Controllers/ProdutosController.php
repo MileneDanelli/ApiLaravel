@@ -34,4 +34,8 @@ class ProdutosController extends Controller
     public function destroy($id) {
         return Produtos::destroy($id);
     }
+
+    public function search($nome) {
+        return Produtos::where('nome', 'like', '%'.$nome.'%')->get();
+    }
 }

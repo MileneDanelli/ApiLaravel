@@ -7,11 +7,11 @@ use Illuminate\Support\Facades\Route;
 
 //Categorias
 Route::resource('/categorias', CategoriasController::class);
-
+Route::get('/categorias/search/{name}', [CategoriasController::class, 'search']);
 
 //Produtos
 Route::resource('/produtos', ProdutosController::class);
-
+Route::get('/produtos/search/{name}', [ProdutosController::class, 'search']);
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();

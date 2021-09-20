@@ -33,4 +33,8 @@ class CategoriasController extends Controller
     public function destroy($id) {
         return Categorias::destroy($id);
     }
+
+    public function search($nome) {
+        return Categorias::where('nome', 'like', '%'.$nome.'%')->get();
+    }
 }

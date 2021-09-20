@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
 //Registrar
 Route::post('/registrar', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
 
 //Rotas Protegidas
 Route::group(['middleware' => ['auth:sanctum']], function() {

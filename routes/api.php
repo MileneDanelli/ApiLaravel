@@ -6,6 +6,8 @@ use App\Http\Controllers\ProdutosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/produtos', [ProdutosController::class, 'index']);
+
 //Registrar
 Route::post('/registrar', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
@@ -17,7 +19,9 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::get('/categorias/search/{name}', [CategoriasController::class, 'search']);
 
     //Produtos
-    Route::resource('/produtos', ProdutosController::class);
+    Route::put('/produtos/{name}', [ProdutosController::class, 'update']);
+    Route::delete('/produtos/{name}', [ProdutosController::class, 'destroy']);
+    Route::post('/produtos', [ProdutosController::class, 'store']);
     Route::get('/produtos/search/{name}', [ProdutosController::class, 'search']);
 
     //Logout

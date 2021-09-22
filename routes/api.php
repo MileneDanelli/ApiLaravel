@@ -26,6 +26,12 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
 
     //Logout
     Route::post('/sair', [AuthController::class, 'logout']);
+
+    //AutoLogin
+    Route::post('/autologin', [AuthController::class, 'autologin']);
+
+    //Retorna usuário
+    Route::post('/user', [AuthController::class, 'user']);
 });
 
 

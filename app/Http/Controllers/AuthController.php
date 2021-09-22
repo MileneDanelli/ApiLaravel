@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -40,6 +39,20 @@ class AuthController extends Controller
         ];
     }
 
+    public function autologin(Request $request) {
+        $token_recebido = $request->bearerToken();
+        if(!auth()->user()->tokenCan('myapptoken') === $token_recebido) {
+            return \response([
+                'message' => 'Inválido!'
+            ], 403);
+        }
+
+        return \response([
+            'message' => 'Sucesso!',
+            'token' => $request->header()
+        ], 200);
+    }
+
     public function login(Request $request) {
         $fields = $request->validate([
             'email' => 'required|string',
@@ -62,5 +75,9 @@ class AuthController extends Controller
         ];
 
         return \response($response, 201);
+    }
+
+    public function user(Request $request) {
+        return auth()->user();
     }
 }

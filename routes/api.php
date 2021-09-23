@@ -14,14 +14,13 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::group(['middleware' => ['auth:sanctum']], function() {
     //Categorias
     Route::resource('/categorias', CategoriasController::class);
-    Route::get('/categorias/search/{name}', [CategoriasController::class, 'search']);
 
     //Produtos
     Route::get('/produtos', [ProdutosController::class, 'index']);
-    Route::put('/produtos/{name}', [ProdutosController::class, 'update']);
-    Route::delete('/produtos/{name}', [ProdutosController::class, 'destroy']);
+    Route::put('/produtos/{id}', [ProdutosController::class, 'update']);
+    Route::get('/produtos/{id}', [ProdutosController::class, 'show']);
+    Route::delete('/produtos/{id}', [ProdutosController::class, 'destroy']);
     Route::post('/produtos', [ProdutosController::class, 'store']);
-    Route::get('/produtos/search/{name}', [ProdutosController::class, 'search']);
 
     //Logout
     Route::post('/sair', [AuthController::class, 'logout']);

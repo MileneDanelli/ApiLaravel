@@ -18,7 +18,22 @@ class ProdutosController extends Controller
             'id_categoria' => 'required'
         ]);
 
-        return Produtos::create($request->all());
+        $produtos = new Produtos();
+        $produtos->nome = $request->nome;
+        $produtos->id_categoria = $request->id_categoria;
+
+        if($request->hasFile('imagem') && $request->file('imagem')->isValid()) {
+            $requestImagem = $request->imagem;
+            $extension = $requestImagem->extension();
+            $imagemNome = md5($requestImagem->imagem->getClientOriginalName() . strtotime('now') . '.' . $extension);
+            $requestImagem->move(public_path('img/produtos'), $imagemNome);
+
+            $produtos->imagem = $imagemNome;
+        }
+
+        $produtos->save();
+
+        return response()->json($produtos, 200);
     }
 
     public function show($id) {

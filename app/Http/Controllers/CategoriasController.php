@@ -54,7 +54,7 @@ class CategoriasController extends Controller
             $requestImagem = $request->imagem;
             $extension = $requestImagem->extension();
             $imagemNome = md5($requestImagem->getClientOriginalName() . strtotime('now') . '.' . $extension);
-            File::put('img/categorias', $imagemNome);
+            $requestImagem->move(public_path('img/categorias'), $imagemNome);
 
             $categorias->imagem = $imagemNome;
         }

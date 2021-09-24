@@ -60,7 +60,7 @@ class ProdutosController extends Controller
             $requestImagem = $request->imagem;
             $extension = $requestImagem->extension();
             $imagemNome = md5($requestImagem->getClientOriginalName() . strtotime('now') . '.' . $extension);
-            $requestImagem->put(public_path('img/produtos'), $imagemNome);
+            $requestImagem->move(public_path('img/produtos'), $imagemNome);
 
             $produtos->imagem = $imagemNome;
         }

@@ -16,11 +16,7 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::resource('/categorias', CategoriasController::class);
 
     //Produtos
-    Route::get('/produtos', [ProdutosController::class, 'index']);
-    Route::put('/produtos/{id}', [ProdutosController::class, 'update']);
-    Route::get('/produtos/{id}', [ProdutosController::class, 'show']);
-    Route::delete('/produtos/{id}', [ProdutosController::class, 'destroy']);
-    Route::post('/produtos', [ProdutosController::class, 'store']);
+    Route::resource('/produtos', ProdutosController::class);
 
     //Logout
     Route::post('/sair', [AuthController::class, 'logout']);
